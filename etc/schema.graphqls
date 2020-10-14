@@ -1,0 +1,27 @@
+schema {
+	query: Query
+	mutation: Mutation
+}
+
+type Query {}
+
+type Mutation {
+	hkUploadFiles(input: [HKUploadInput!]): HKUploadOutput @resolver(class: "HuyKon\\MageGraphQlUploader\\Model\\Resolver\\HkUploadFiles") @doc(description:"Upload files by to pub/media static folder")
+}
+
+input HKUploadInput {
+	name: String! @doc(description:"The file name include extensions")
+	base64_encoded_file: String! @doc(description:"The  base64 code format's file")
+}
+
+type HKUploadOutput {
+	items: [HKUploadedReturn]
+}
+
+type HKUploadedReturn {
+	name: String @doc(description: "File Name")
+	full_path: String @doc(description: "File Full path")
+	quote_path: String @doc(description: "File Quote path")
+	order_path: String @doc(description: "File Order path")
+	secret_key: String @doc(description: "File Secret key")
+}
